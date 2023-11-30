@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { FontFamily, Padding, Border, Color } from "../GlobalStyles";
+import { useFonts } from 'expo-font';
 
 export const Onboarding1 = () => {
-  return (
+  const [fontsLoaded] = useFonts({
+    'PoppinsBold': require('@/Assets/font/poppins/Poppins-Bold.ttf'),
+    'PoppinsThin': require('@/Assets/font/poppins/Poppins-Light.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+    return (
     <View style={[styles.onboarding1, styles.button1ShadowBox]}>
-      <Image
-        style={styles.onboarding1Child}
-        resizeMode="cover"
-        source={require("../assets/Welcome.png")}
-      />
+      
       <Image
         style={styles.image2Icon}
         resizeMode="cover"
-        source={require("../assets/image-2.png")}
+        source={require("@/Assets/img/wellcome.png")}
       />
       <View style={styles.textBlock}>
         <Text style={styles.welcomeToQreveal}>Welcome to QReveal</Text>
@@ -21,11 +27,6 @@ export const Onboarding1 = () => {
           Simplify, Scan, Discover: Navigate the World with QR Ease!
         </Text>
       </View>
-      <Image
-        style={styles.statusBarLight}
-        resizeMode="cover"
-        source={require("../assets/status-bar--light.png")}
-      />
       <View style={styles.actions}>
         <Pressable style={styles.buttonLayout} onPress={() => {}}>
           <Text style={[styles.skip, styles.skipTypo]}>Skip</Text>
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     },
   },
   skipTypo: {
-    fontFamily: FontFamily.poppinsBold,
+    fontFamily: 'PoppinsBold',
     fontWeight: "700",
     letterSpacing: 0,
     textAlign: "center",
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   },
   image2Icon: {
     marginLeft: -178,
-    top: 130,
+    top: 110,
     width: 355,
     height: 319,
     left: "50%",
@@ -84,14 +85,14 @@ const styles = StyleSheet.create({
     letterSpacing: -0.3,
     lineHeight: 42,
     fontWeight: "600",
-    fontFamily: FontFamily.poppinsSemiBold,
+    fontFamily: 'PoppinsBold',
     color: "#1a1a1a",
     textAlign: "center",
   },
   simplifyScanDiscover: {
     fontSize: 17,
     lineHeight: 25,
-    fontFamily: FontFamily.poppinsRegular,
+    fontFamily: 'PoppinsThin',
     color: "#808080",
     width: 287,
     marginTop: 8,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   },
   textBlock: {
     marginLeft: -145,
-    top: 485,
+    top: 445,
     width: 290,
     justifyContent: "center",
     alignItems: "center",
